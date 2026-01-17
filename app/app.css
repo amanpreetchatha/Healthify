@@ -1,15 +1,110 @@
-@import "tailwindcss";
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: #111;
+    height: 100dvh;
 }
-
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+header{
+    background-color: #333;
+    order: 1;
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+    font-weight: 800;
+    padding: 1em;
+    color: #fff;
+}
+nav{
+    background-color: #740;
+    order: 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+nav a{
+  margin-left: 1em;
+  margin-right: 1em;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  padding: 1em;
+}
+.activeNavLink{
+    background-color: #333;
+}
+.navLink{
+    background-color: blue;
+}
+main{
+    background-color: #ddd;
+    order: 2;
+    height: 100%;
+    padding: 2em;
+    color: #111;
+    display: flex;
+    flex-direction: column;
+}
+@media screen and (min-width: 500px) {
+    nav{
+        order: 2;
+    }
+    main{
+        order: 3;
+    }
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid #222 1px;
+    border-radius: 0.25em;
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    width: max-content;
+    align-self: center;
+    margin: 2em;
+}
+@media screen and (min-width: 500px){
+    form{
+        width: 50%;
+    }
+}
+button{
+    max-width: fit-content;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+    background-color: rgb(12, 74, 209);
+    border: 0;
+    border-radius: 1em;
+    color: #fff;
+    margin: 1em;
+}
+button:hover{
+    cursor:pointer;
+}
+.registerButton{
+    background-color: rgb(24, 97, 6);
+}
+.resetButton{
+    background-color: rgb(248, 79, 18);
+}
+.cancelButton{
+    background-color: rgb(216, 24, 24);
+}
+input{
+    margin: 1em;
+    height: 1.5em;
+}
+li{
+    list-style-type: none;
+    margin: 1em;
+}
+.message{
+    color: red;
 }

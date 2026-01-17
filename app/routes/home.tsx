@@ -1,13 +1,19 @@
+import useUserContext from "~/context";
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import Login from "./login";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Gym" },
+    { name: "A simple web app", content: "A web app to track your fitness journey." },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  const user=useUserContext();
+  return user===undefined ? <Login/> : (
+    <div>
+      <h1>This is a dashboard for {user.email}</h1>
+    </div>
+  );
 }
