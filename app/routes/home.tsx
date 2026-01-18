@@ -4,8 +4,8 @@ import Login from "./login";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Gym" },
-    { name: "A simple web app", content: "A web app to track your fitness journey." },
+    { title: "Gym | Home" },
+    { name: "description", content: "A web app to track your fitness journey." },
   ];
 }
 

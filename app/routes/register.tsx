@@ -1,6 +1,13 @@
 import { ReactNode, useRef, useState } from "react";
 import supabase from "../supabase-client";
+import { MetaArgs, NavLink, redirect } from "react-router";
 
+export function meta(){
+    return [
+        { title: "Gym | Register" },
+        { name: "description", content: "Register here to start tracking your health"}
+    ]
+}
 
 export default function Register(){
     const [email, setEmail] = useState("");
@@ -42,24 +49,25 @@ export default function Register(){
     }
     return (
         <form>
-            <span className="message">{message}</span>
-            <label>
-                Email:
-                <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
-            </label>
-            <label>
-                Password:
-                <input ref={pwd1} type="password" value={password} onChange={(e)=>setPassword(e.target.value)} minLength={8}/>
-            </label>
-            <label>
-                Re-enter Password:
-                <input ref={pwd2} type="password" value={password2} onChange={(e)=>setPassword2(e.target.value)}/>
-            </label>
-            <label>
-                <button type="button" className="cancelButton" onClick={()=>null}>Cancel</button>
-                <button type="reset" className="resetButton" onClick={()=>{setEmail(""); setPassword("");setPassword2(""); setMessage("")}}>Reset</button>
+            
+            <div className="formDiv">
+                <label className="inputLabel">Email</label>
+                <input placeholder="user@email.com" type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
+            </div>
+            <div className="formDiv">
+                <label className="inputLabel">Password</label>
+                <input placeholder="********" ref={pwd1} type="password" value={password} onChange={(e)=>setPassword(e.target.value)} minLength={8}/>
+            </div>
+            <div className="formDiv">
+                <label className="inputLabel">Re-enter Password</label>
+                <input placeholder="********" ref={pwd2} type="password" value={password2} onChange={(e)=>setPassword2(e.target.value)}/>
+            </div>
+            <div className="formDiv">
+                <div className="message">{message}</div>
                 <button className="registerButton" onClick={(e)=>{e.preventDefault(); signUpWithEmail()}}>Register</button>
-            </label>
+                
+                <p>Already have an account? <NavLink to="/login">Login</NavLink></p>
+            </div>
         </form>
     )
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Route } from "./+types/home";
 import supabase from "../supabase-client";
-import { NavLink } from "react-router";
+import { NavLink, redirect } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -29,7 +29,7 @@ export default function Login() {
       if (error){
           setMessage(error.message)
       }
-      
+      redirect("/");
     }
                  
   }
@@ -47,16 +47,18 @@ export default function Login() {
   }
   return (
     <form>
-      <span className="message">{message}</span>
-            <label>
-                Email:
+      
+            <div>
+                <label className="inputLabel">Email</label>
                 <input name="email" type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-            </label>
-            <label>
-                Password:
+            </div>
+            <div>
+                <label className="inputLabel">Password</label>
                 <input name="password" type="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-            </label>
+            </div>
+            <div className="message">{message}</div>
             <button className="button" onClick={(e)=>{e.preventDefault(); signInWithEmail()}}>Login</button>
+            
             <p>Don't have an account? <NavLink to='/register'>Register</NavLink></p>
         </form>
   )
