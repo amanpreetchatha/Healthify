@@ -1,6 +1,6 @@
 import { ReactNode, useRef, useState } from "react";
 import supabase from "../supabase-client";
-import { MetaArgs, NavLink, redirect } from "react-router";
+import { ActionFunctionArgs, Form, MetaArgs, NavLink, redirect, useNavigate } from "react-router";
 
 export function meta(){
     return [
@@ -12,14 +12,13 @@ export function meta(){
 export default function Register(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [password2, setPassword2] = useState("");
     const [name, setName] = useState("");
     const [message,setMessage] = useState("");
-    const pwd1 = useRef<HTMLInputElement>(null);
-    const pwd2 = useRef<HTMLInputElement>(null);
     const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     async function signUpWithEmail() {
+        setLoading(true);
         if(validateInputs()===true){
             const { data,error } = await supabase.auth.signUp({
             email,
@@ -29,9 +28,10 @@ export default function Register(){
         
             if (error)
                 setMessage(error.message);
-
+            
+            setLoading(false);
+            navigate("/");
         }
-        
         
         
     }
@@ -40,27 +40,25 @@ export default function Register(){
         if(emailPattern.test(email)===false)
             setMessage("Enter a valid email")
         else if(password.length<8)
-            setMessage("Password needs to be atleast 8 characters");
-        else if(password!==password2)
-            setMessage("Passwords don't match");            
+            setMessage("Password needs to be atleast 8 characters");        
         else
             return true;
         return false;
     }
+    
     return (
         <form>
-            
+            <div className="formDiv">
+                <label className="inputLabel">Name</label>
+                <input placeholder="Enter name" type="text" value={name} onChange={(e)=>setName(e.target.value)} required />
+            </div>
             <div className="formDiv">
                 <label className="inputLabel">Email</label>
-                <input placeholder="user@email.com" type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
+                <input placeholder="user@example.com" type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
             </div>
             <div className="formDiv">
                 <label className="inputLabel">Password</label>
-                <input placeholder="********" ref={pwd1} type="password" value={password} onChange={(e)=>setPassword(e.target.value)} minLength={8}/>
-            </div>
-            <div className="formDiv">
-                <label className="inputLabel">Re-enter Password</label>
-                <input placeholder="********" ref={pwd2} type="password" value={password2} onChange={(e)=>setPassword2(e.target.value)}/>
+                <input placeholder="********" type="password" value={password} onChange={(e)=>setPassword(e.target.value)} minLength={8}/>
             </div>
             <div className="formDiv">
                 <div className="message">{message}</div>

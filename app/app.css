@@ -80,9 +80,11 @@ button{
     color: #fff;
     margin: 1em;
     margin-left: 0;
+    opacity: 80%;
 }
 button:hover{
     cursor:pointer;
+    opacity: 100%;
 }
 .registerButton{
     background-color: rgb(24, 97, 6);
@@ -96,7 +98,7 @@ button:hover{
 }
 input{
     margin-bottom: 1.5em;
-    height: 1.6em;
+    height: 2em;
     min-width: 20em;
 }
 li{

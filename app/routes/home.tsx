@@ -11,6 +11,8 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   const user=useUserContext();
+  
+  //issue: flash of login component before user home component.
   return user===undefined ? <Login/> : (
     <div>
       <h1>This is a dashboard for {user.email}</h1>
