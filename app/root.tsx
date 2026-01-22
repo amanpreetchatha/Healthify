@@ -12,7 +12,7 @@ import "./app.css";
 import NavBar from "./components/navbar";
 import Header from "./components/header";
 import { UserProvider } from "./context";
-
+import { SpeedInsights } from "@vercel/speed-insights/react"
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
