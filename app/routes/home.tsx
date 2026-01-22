@@ -15,7 +15,9 @@ export default function Home() {
   const user=useUserContext();
   const [enteredWeight,setEnteredWeight]=useState("");
   const [message,setMessage]=useState("");
-  async function setWeight(){
+
+  async function setWeight(e: React.MouseEvent){
+    e.preventDefault();
     try{
       const {data, error} = await supabase
       .from("metrics")
