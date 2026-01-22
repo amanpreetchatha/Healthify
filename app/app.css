@@ -47,6 +47,7 @@ main{
     color: #111;
     display: flex;
     flex-direction: column;
+    
 }
 @media screen and (min-width: 500px) {
     nav{
@@ -54,6 +55,7 @@ main{
     }
     main{
         order: 3;
+        flex-direction: row;
     }
     
 }
