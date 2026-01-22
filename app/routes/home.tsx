@@ -37,7 +37,10 @@ export default function Home() {
       <form>
         <div>
           <label>Weight</label>
-          <input placeholder="Enter weight" value={enteredWeight} ></input>
+          <input placeholder="Enter weight" value={enteredWeight} onChange={(e)=>{
+            e.preventDefault();
+            setEnteredWeight(e.target.value)
+          }}></input>
           <button onClick={setWeight}>Save</button>
           <p>{message}</p>
         </div>
