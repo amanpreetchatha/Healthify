@@ -37,14 +37,14 @@ export default function Home() {
   return user===undefined ? <Login/> : (
     <div className="weight-form">
       <form>
-        <div>
-          <label>Weight</label>
+        <div className="formDiv">
+          <label className="inputLabel">Weight</label>
           <input placeholder="Enter weight" value={enteredWeight} onChange={(e)=>{
             e.preventDefault();
             setEnteredWeight(e.target.value)
           }}></input>
         </div>
-        <div>
+        <div className="formDiv">
           <button onClick={setWeight}>Save</button>
           <p>{message}</p>
         </div>  
