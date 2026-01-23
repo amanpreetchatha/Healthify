@@ -43,9 +43,11 @@ export default function Home() {
             e.preventDefault();
             setEnteredWeight(e.target.value)
           }}></input>
+        </div>
+        <div>
           <button onClick={setWeight}>Save</button>
           <p>{message}</p>
-        </div>
+        </div>  
       </form>
     </div>
   );
