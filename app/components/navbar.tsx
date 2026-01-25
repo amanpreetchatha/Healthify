@@ -11,9 +11,9 @@ export default function NavBar(){
                 <NavLink to="/login" className={({isActive})=>isActive ? "activeNavLink" : "navLink"}>Login</NavLink> :
                 <>
                     <NavLink to="/" className={({isActive})=>isActive ? "activeNavLink" : "navLink"}>Home</NavLink>
-                    <NavLink to="/" className={({isActive})=>isActive ? "activeNavLink" : "navLink"} onClick={()=>supabase.auth.signOut()}>Logout</NavLink>
+                    <NavLink to="/repcounter" className={({isActive})=>isActive ? "activeNavLink" : "navLink"}>Rep Counter</NavLink>
+                    <NavLink to="/login" className={({isActive})=>isActive ? "navLink" : "navLink"} onClick={()=>supabase.auth.signOut()}>Logout</NavLink> 
                 </>
-                
             }
         </nav>
     )
