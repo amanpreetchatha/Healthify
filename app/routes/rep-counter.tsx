@@ -1,33 +1,18 @@
+import { useState } from "react";
 
 export default function RepCounter(){
+    const [exerciseName,setExerciseName] = useState("Pull ups");
+
+    const exerciseItem = 
+        <div className="formDiv">
+            <label className="inputLabel">{exerciseName}</label>
+            <input className="repInput" placeholder="weight" type="number"></input>
+            <input className="repInput" placeholder="reps" type="number"></input>
+        </div>;
 
     return (
         <form>
-            <div className="formDiv">
-                <label className="inputLabel">Pull ups </label>
-                <input className="repInput" placeholder="weight" type="number"></input>
-                <input className="repInput" placeholder="reps" type="number"></input>
-            </div>
-            <div className="formDiv">
-                <label className="inputLabel">Squat </label>
-                <input className="repInput" placeholder="weight" type="number"></input>
-                <input className="repInput" placeholder="reps" type="number"></input>
-            </div>
-            <div className="formDiv">
-                <label className="inputLabel">Bench Press </label>
-                <input className="repInput" placeholder="weight" type="number"></input>
-                <input className="repInput" placeholder="reps" type="number"></input>
-            </div>
-            <div className="formDiv">
-                <label className="inputLabel">Dips </label>
-                <input className="repInput" placeholder="weight" type="number"></input>
-                <input className="repInput" placeholder="reps" type="number"></input>
-            </div>
-            <div className="formDiv">
-                <label className="inputLabel">Calf Raise </label>
-                <input className="repInput" placeholder="weight" type="number"></input>
-                <input className="repInput" placeholder="reps" type="number"></input>
-            </div>
+            {exerciseItem}
             <div>
                 <button>Save</button>
             </div>
