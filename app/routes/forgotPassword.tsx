@@ -48,16 +48,16 @@ export default function ForgotPassword() {
     return false;
   }*/
   return (
-    <form>
-      
-            <div>
-                <label className="inputLabel">Email</label>
-                <input placeholder="user@example.com" type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-            </div>
-            <div className="message">{message}</div>
-            <button>Reset Password</button>
-            <NavLink to="/login">Login</NavLink>
-            
-        </form>
+    <div className="containerDiv">
+      <form>
+        <div>
+            <label className="inputLabel">Email</label>
+            <input placeholder="user@example.com" type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+        </div>
+        <div className="message">{message}</div>
+        <button>Reset Password</button>
+        <NavLink to="/login">Login</NavLink>        
+      </form>
+    </div>
   )
 }

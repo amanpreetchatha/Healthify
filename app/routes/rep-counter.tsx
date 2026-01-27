@@ -11,11 +11,13 @@ export default function RepCounter(){
         </div>;
 
     return (
-        <form>
-            {exerciseItem}
-            <div>
-                <button>Save</button>
-            </div>
-        </form>
+        <div className="containerDiv">
+            <form>
+                {exerciseItem}
+                <div>
+                    <button>Save</button>
+                </div>
+            </form>
+        </div>
     )
 }

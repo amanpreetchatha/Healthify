@@ -49,20 +49,21 @@ export default function Login() {
     return false;
   }
   return (
-    <form>
-      
-            <div>
-                <label className="inputLabel">Email</label>
-                <input placeholder="user@example.com" type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-            </div>
-            <div>
-                <label className="inputLabel">Password</label>
-                <input placeholder="********" type="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-            </div>
-            <div className="message">{message}</div>
-            <button className="button" onClick={(e)=>{e.preventDefault(); signInWithEmail()}} disabled={loading}>Login</button>
-            <NavLink to="/forgotpassword">Forgot Password?</NavLink>
-            <p>Don't have an account? <NavLink to='/register'>Register</NavLink></p>
-        </form>
+    <div className="containerDiv">
+      <form>
+        <div>
+            <label className="inputLabel">Email</label>
+            <input placeholder="user@example.com" type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+        </div>
+        <div>
+            <label className="inputLabel">Password</label>
+            <input placeholder="********" type="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+        </div>
+        <div className="message">{message}</div>
+        <button className="button" onClick={(e)=>{e.preventDefault(); signInWithEmail()}} disabled={loading}>Login</button>
+        <NavLink to="/forgotpassword">Forgot Password?</NavLink>
+        <p>Don't have an account? <NavLink to='/register'>Register</NavLink></p>
+      </form>
+    </div>
   )
 }

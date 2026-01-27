@@ -7,14 +7,26 @@ ChartJS.register(
   CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend
 );
 
+interface WeightData{
+  labels: string[],
+  datasets: [{
+    label: string,
+    data: number[],
+    borderColor: string
+  }]
+}
 
 export default function BioMetrics(){
     const user=useUserContext();
     const [enteredWeight,setEnteredWeight]=useState("");
     const [message,setMessage]=useState("");
-    let labels = [];
-    let weightData=[];
-
+    const [reRender, setReRender]=useState(true);
+    let labels: string[] = [];
+    let weightData: number[] = [];
+    const [weightChartData,setWeightChartData]=useState<WeightData>({labels: [],datasets:[{label:"",data:[],borderColor:""}]}) ;
+    useEffect(()=>{
+      fetchBioMetrics();
+    },[reRender]);
     async function fetchBioMetrics(){
       const {data, error} = await supabase
       .from("bio_metrics")
@@ -25,53 +37,58 @@ export default function BioMetrics(){
       data?.map((row, index)=>{
         labels.push(row.created_at.slice(0,10));
         weightData.push(row.weight);
-      })
+      });
+      setWeightChartData({
+        labels: labels,
+        datasets: [{
+          label: "Weight",
+          data: weightData, 
+          borderColor: "#f40",
+        }]
+      });
+      setReRender(true);
     }
-    useEffect(()=>{
-      fetchBioMetrics();
-    },[]);
     async function setWeight(e: React.MouseEvent){
         e.preventDefault();
-        try{
-        const {data, error} = await supabase
-        .from("bio_metrics")
-        .insert({user_id: user?.id,
-            weight: enteredWeight,
-            created_at: new Date(),
-        })
-        if(error)
+        setReRender(false);
+        if(enteredWeight.length!==0){
+          const {data, error} = await supabase
+          .from("bio_metrics")
+          .insert({user_id: user?.id,
+              weight: enteredWeight,
+              created_at: new Date(),
+          })
+          if(error){
             setMessage(error.message);
-        setMessage("Saved Successfully!");
-        setEnteredWeight("");
-        }catch(error: any){
-        setMessage(error.message);
+          }else{
+            setMessage("Saved Successfully!");
+            setEnteredWeight("");
+          }
+        }else{
+          setMessage("Weight can't be empty!")
         }
     }
     
-    const weightForm = (
-    <div className="weight-form">
-      <form>
-        <div className="formDiv">
-          <label className="inputLabel">Weight</label>
-          <input placeholder="Enter weight in Kg" value={enteredWeight} onChange={(e)=>{
-            e.preventDefault();
-            setEnteredWeight(e.target.value)
-          }}></input>
-        </div>
-        
-        <div className="formDiv">
-          <button onClick={setWeight}>Save</button>
-          <div>{message}</div>
-        </div>  
-      </form>
-    </div>
-    );
-
-    const weightChart = (
-      <div className="containerDiv">
-        <span>Weight Progress</span>
-        {/* <Line options={{}} data={} /> */}
+    return (
+    <div className="containerDiv">
+      <div>
+        <form>
+          <div className="formDiv">
+            <label className="inputLabel">Weight</label>
+            <input className="data-input" placeholder="Kg" value={enteredWeight} type="number" required onChange={(e)=>{
+              e.preventDefault();
+              setEnteredWeight(e.target.value);
+              setMessage("");
+            }}></input>
+            <button type="submit" onClick={setWeight}>Save</button>
+            <span>{message}</span>
+          </div>
+        </form>
       </div>
-    )
-    return weightChart;
+      <div>
+        
+        <Line className="chart" options={{}} data={weightChartData} />
+      </div>
+    </div>
+    ) 
 }
