@@ -85,9 +85,14 @@ export default function BioMetrics(){
           </div>
         </form>
       </div>
-      <div>
+      <div className="chart">
         
-        <Line className="chart" options={{}} data={weightChartData} />
+        <Line 
+          options={{
+            responsive: true,
+            
+            
+          }} data={weightChartData} />
       </div>
     </div>
     ) 
