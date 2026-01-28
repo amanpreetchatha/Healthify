@@ -137,8 +137,7 @@ li{
     height: fit-content;
 }
 .chart{
-    width: 120%;
-    height: 60%;
+    
     
 }
 @media screen and (min-width:500px) {
